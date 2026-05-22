@@ -34,8 +34,8 @@
     #export-target.theme-dark .hljs-tag            { color: #e06c75; }
 
     /* ── Atom One Light ── */
-    #export-target.theme-light  { background: #fafafa; }
-    #export-target.theme-light .hljs                { background: #fafafa; color: #383a42; }
+    #export-target.theme-light  { background: #f0f4f9; }
+    #export-target.theme-light .hljs                { background: #f0f4f9; color: #383a42; }
     #export-target.theme-light .hljs-keyword,
     #export-target.theme-light .hljs-selector-tag  { color: #a626a4; }
     #export-target.theme-light .hljs-title,
@@ -256,12 +256,12 @@
     /* ── Tema Chiaro: override variabili ───────────────────────────────── */
     body.light {
       --app-bg:     #f0f0f5;
-      --panel-bg:   #fafafa;
+      --panel-bg:   #f0f4f9;
       --fg:         #383a42;
       --fg-dim:     #777;
       --border:     #d8d8e0;
       --sel:        #d0d0e0;
-      --preview-bg: #fafafa;
+      --preview-bg: #f0f4f9;
     }
     body.light header h1      { color: #1a1a2e; }
     body.light #code-input    { color: #383a42; }
@@ -383,7 +383,7 @@ int somma = amici.stream()
         await document.fonts.ready;
 
         const canvas = await html2canvas(exportTarget, {
-          backgroundColor: currentTheme === 'dark' ? '#282c34' : '#fafafa',
+          backgroundColor: currentTheme === 'dark' ? '#282c34' : '#f0f4f9',
           scale: 2,
           useCORS: true,
           logging: false,
