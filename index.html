@@ -9,9 +9,52 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
-  <!-- highlight.js temi -->
-  <link id="hl-dark"  rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
-  <link id="hl-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-light.min.css" disabled>
+  <!-- highlight.js base (nessun tema CDN — usiamo CSS inline per entrambi i temi) -->
+  <style>
+    /* ── Atom One Dark ── */
+    #export-target.theme-dark  { background: #282c34; }
+    #export-target.theme-dark .hljs                { background: #282c34; color: #abb2bf; }
+    #export-target.theme-dark .hljs-keyword,
+    #export-target.theme-dark .hljs-selector-tag  { color: #c678dd; }
+    #export-target.theme-dark .hljs-title,
+    #export-target.theme-dark .hljs-section        { color: #61afef; }
+    #export-target.theme-dark .hljs-type,
+    #export-target.theme-dark .hljs-class .hljs-title { color: #e5c07b; }
+    #export-target.theme-dark .hljs-string,
+    #export-target.theme-dark .hljs-attr           { color: #98c379; }
+    #export-target.theme-dark .hljs-number,
+    #export-target.theme-dark .hljs-literal        { color: #d19a66; }
+    #export-target.theme-dark .hljs-comment        { color: #5c6370; font-style: italic; }
+    #export-target.theme-dark .hljs-built_in,
+    #export-target.theme-dark .hljs-name           { color: #e5c07b; }
+    #export-target.theme-dark .hljs-operator,
+    #export-target.theme-dark .hljs-punctuation    { color: #56b6c2; }
+    #export-target.theme-dark .hljs-variable,
+    #export-target.theme-dark .hljs-params         { color: #e06c75; }
+    #export-target.theme-dark .hljs-tag            { color: #e06c75; }
+
+    /* ── Atom One Light ── */
+    #export-target.theme-light  { background: #fafafa; }
+    #export-target.theme-light .hljs                { background: #fafafa; color: #383a42; }
+    #export-target.theme-light .hljs-keyword,
+    #export-target.theme-light .hljs-selector-tag  { color: #a626a4; }
+    #export-target.theme-light .hljs-title,
+    #export-target.theme-light .hljs-section        { color: #4078f2; }
+    #export-target.theme-light .hljs-type,
+    #export-target.theme-light .hljs-class .hljs-title { color: #c18401; }
+    #export-target.theme-light .hljs-string,
+    #export-target.theme-light .hljs-attr           { color: #50a14f; }
+    #export-target.theme-light .hljs-number,
+    #export-target.theme-light .hljs-literal        { color: #986801; }
+    #export-target.theme-light .hljs-comment        { color: #a0a1a7; font-style: italic; }
+    #export-target.theme-light .hljs-built_in,
+    #export-target.theme-light .hljs-name           { color: #c18401; }
+    #export-target.theme-light .hljs-operator,
+    #export-target.theme-light .hljs-punctuation    { color: #0184bc; }
+    #export-target.theme-light .hljs-variable,
+    #export-target.theme-light .hljs-params         { color: #e45649; }
+    #export-target.theme-light .hljs-tag            { color: #e45649; }
+  </style>
 
   <!-- highlight.js + html2canvas -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
@@ -293,8 +336,6 @@ int somma = amici.stream()
     const previewCode = document.getElementById('preview-code');
     const exportTarget= document.getElementById('export-target');
     const statusEl    = document.getElementById('status');
-    const hlDark      = document.getElementById('hl-dark');
-    const hlLight     = document.getElementById('hl-light');
 
     let currentTheme = 'dark';
 
@@ -302,11 +343,10 @@ int somma = amici.stream()
     function setTheme(theme) {
       currentTheme = theme;
       document.body.classList.toggle('light', theme === 'light');
-      hlDark.disabled  = (theme === 'light');
-      hlLight.disabled = (theme === 'dark');
+      exportTarget.classList.toggle('theme-dark',  theme === 'dark');
+      exportTarget.classList.toggle('theme-light', theme === 'light');
       document.getElementById('btn-dark').classList.toggle('active',  theme === 'dark');
       document.getElementById('btn-light').classList.toggle('active', theme === 'light');
-      exportTarget.style.background = (theme === 'dark') ? '#282c34' : '#fafafa';
       updatePreview();
     }
 
@@ -315,14 +355,17 @@ int somma = amici.stream()
       const code = input.value;
       const lang = langSelect.value;
 
-      previewCode.removeAttribute('class');
-      previewCode.textContent = code;
-
-      if (lang !== 'auto') {
-        previewCode.classList.add('language-' + lang);
+      let highlighted;
+      if (lang === 'auto') {
+        highlighted = hljs.highlightAuto(code).value;
+      } else {
+        try {
+          highlighted = hljs.highlight(code, { language: lang }).value;
+        } catch (_) {
+          highlighted = hljs.highlightAuto(code).value;
+        }
       }
-
-      hljs.highlightElement(previewCode);
+      previewCode.innerHTML = highlighted;
     }
 
     input.addEventListener('input', updatePreview);
