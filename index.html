@@ -5,83 +5,78 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Code → PNG</title>
 
-  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-
-  <!-- highlight.js base (nessun tema CDN — usiamo CSS inline per entrambi i temi) -->
-  <style>
-    /* ── Atom One Dark ── */
-    #export-target.theme-dark  { background: #282c34; }
-    #export-target.theme-dark .hljs                { background: #282c34; color: #abb2bf; }
-    #export-target.theme-dark .hljs-keyword,
-    #export-target.theme-dark .hljs-selector-tag  { color: #c678dd; }
-    #export-target.theme-dark .hljs-title,
-    #export-target.theme-dark .hljs-section        { color: #61afef; }
-    #export-target.theme-dark .hljs-type            { color: #e5c07b; }
-    #export-target.theme-dark .hljs-title.class_,
-    #export-target.theme-dark .hljs-class .hljs-title { color: #e5913a; }
-    #export-target.theme-dark .hljs-string,
-    #export-target.theme-dark .hljs-attr           { color: #98c379; }
-    #export-target.theme-dark .hljs-number,
-    #export-target.theme-dark .hljs-literal        { color: #d19a66; }
-    #export-target.theme-dark .hljs-comment        { color: #5c6370; font-style: italic; }
-    #export-target.theme-dark .hljs-built_in,
-    #export-target.theme-dark .hljs-name           { color: #e5c07b; }
-    #export-target.theme-dark .hljs-operator,
-    #export-target.theme-dark .hljs-punctuation    { color: #56b6c2; }
-    #export-target.theme-dark .hljs-variable,
-    #export-target.theme-dark .hljs-params         { color: #e06c75; }
-    #export-target.theme-dark .hljs-tag            { color: #e06c75; }
-
-    /* ── Atom One Light ── */
-    #export-target.theme-light  { background: #f0f4f9; }
-    #export-target.theme-light .hljs                { background: #f0f4f9; color: #383a42; }
-    #export-target.theme-light .hljs-keyword,
-    #export-target.theme-light .hljs-selector-tag  { color: #a626a4; }
-    #export-target.theme-light .hljs-title,
-    #export-target.theme-light .hljs-section        { color: #4078f2; }
-    #export-target.theme-light .hljs-type            { color: #c18401; }
-    #export-target.theme-light .hljs-title.class_,
-    #export-target.theme-light .hljs-class .hljs-title { color: #d06000; }
-    #export-target.theme-light .hljs-string,
-    #export-target.theme-light .hljs-attr           { color: #50a14f; }
-    #export-target.theme-light .hljs-number,
-    #export-target.theme-light .hljs-literal        { color: #986801; }
-    #export-target.theme-light .hljs-comment        { color: #a0a1a7; font-style: italic; }
-    #export-target.theme-light .hljs-built_in,
-    #export-target.theme-light .hljs-name           { color: #c18401; }
-    #export-target.theme-light .hljs-operator,
-    #export-target.theme-light .hljs-punctuation    { color: #0184bc; }
-    #export-target.theme-light .hljs-variable,
-    #export-target.theme-light .hljs-params         { color: #e45649; }
-    #export-target.theme-light .hljs-tag            { color: #e45649; }
-  </style>
-
-  <!-- highlight.js + html2canvas -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
   <style>
+    /* ── Syntax: Atom One Dark ─────────────────────────────────────────── */
+    #export-target.theme-dark  { background: #282c34; }
+    #export-target.theme-dark .hljs                  { background: #282c34; color: #abb2bf; }
+    #export-target.theme-dark .hljs-keyword,
+    #export-target.theme-dark .hljs-selector-tag     { color: #c678dd; }
+    #export-target.theme-dark .hljs-title,
+    #export-target.theme-dark .hljs-section          { color: #61afef; }
+    #export-target.theme-dark .hljs-type             { color: #e5c07b; }
+    #export-target.theme-dark .hljs-title.class_,
+    #export-target.theme-dark .hljs-class .hljs-title{ color: #e5913a; }
+    #export-target.theme-dark .hljs-string,
+    #export-target.theme-dark .hljs-attr             { color: #98c379; }
+    #export-target.theme-dark .hljs-number,
+    #export-target.theme-dark .hljs-literal          { color: #d19a66; }
+    #export-target.theme-dark .hljs-comment          { color: #5c6370; font-style: italic; }
+    #export-target.theme-dark .hljs-built_in,
+    #export-target.theme-dark .hljs-name             { color: #e5c07b; }
+    #export-target.theme-dark .hljs-operator,
+    #export-target.theme-dark .hljs-punctuation      { color: #56b6c2; }
+    #export-target.theme-dark .hljs-variable,
+    #export-target.theme-dark .hljs-params           { color: #e06c75; }
+    #export-target.theme-dark .hljs-tag              { color: #e06c75; }
+
+    /* ── Syntax: Atom One Light ────────────────────────────────────────── */
+    #export-target.theme-light  { background: #f0f4f9; }
+    #export-target.theme-light .hljs                  { background: #f0f4f9; color: #383a42; }
+    #export-target.theme-light .hljs-keyword,
+    #export-target.theme-light .hljs-selector-tag     { color: #a626a4; }
+    #export-target.theme-light .hljs-title,
+    #export-target.theme-light .hljs-section          { color: #4078f2; }
+    #export-target.theme-light .hljs-type             { color: #c18401; }
+    #export-target.theme-light .hljs-title.class_,
+    #export-target.theme-light .hljs-class .hljs-title{ color: #d06000; }
+    #export-target.theme-light .hljs-string,
+    #export-target.theme-light .hljs-attr             { color: #50a14f; }
+    #export-target.theme-light .hljs-number,
+    #export-target.theme-light .hljs-literal          { color: #986801; }
+    #export-target.theme-light .hljs-comment          { color: #a0a1a7; font-style: italic; }
+    #export-target.theme-light .hljs-built_in,
+    #export-target.theme-light .hljs-name             { color: #c18401; }
+    #export-target.theme-light .hljs-operator,
+    #export-target.theme-light .hljs-punctuation      { color: #0184bc; }
+    #export-target.theme-light .hljs-variable,
+    #export-target.theme-light .hljs-params           { color: #e45649; }
+    #export-target.theme-light .hljs-tag              { color: #e45649; }
+
     /* ── Reset & base ──────────────────────────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --app-bg:      #1e1e2e;
-      --panel-bg:    #282c34;
-      --fg:          #abb2bf;
-      --fg-dim:      #888;
-      --border:      #3e4451;
-      --accent:      #5865f2;
-      --accent-hov:  #4752c4;
-      --sel:         #3e4451;
-      --preview-bg:  #282c34;
-      --radius:      10px;
+      --app-bg:     #1e1e2e;
+      --panel-bg:   #282c34;
+      --fg:         #abb2bf;
+      --fg-dim:     #666;
+      --border:     #3e4451;
+      --accent:     #5865f2;
+      --accent-hov: #4752c4;
+      --sel:        #3e4451;
+      --radius:     10px;
+      /* valori live aggiornati dagli slider */
+      --code-font-size:   14px;
+      --code-line-height: 1.65;
+      --code-padding:     26px;
     }
 
-    html, body {
-      min-width: 700px;
-    }
+    html, body { min-width: 720px; }
 
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -95,92 +90,121 @@
 
     /* ── Header ────────────────────────────────────────────────────────── */
     header {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-      padding: 14px 22px 10px;
+      padding: 13px 22px 8px;
       flex-shrink: 0;
     }
-
     header h1 {
-      font-size: 20px;
+      font-size: 19px;
       font-weight: 700;
       color: #fff;
       letter-spacing: -.3px;
     }
 
-    /* ── Toolbar ───────────────────────────────────────────────────────── */
+    /* ── Toolbar principale ─────────────────────────────────────────────── */
     .toolbar {
       display: flex;
       align-items: center;
-      gap: 10px;
-      padding: 4px 22px 10px;
+      gap: 8px;
+      padding: 0 22px 8px;
       flex-shrink: 0;
       white-space: nowrap;
+      overflow: visible;
     }
-
-    .toolbar label {
-      font-size: 13px;
-      color: var(--fg-dim);
-    }
+    .toolbar label { font-size: 12px; color: var(--fg-dim); }
 
     select {
       background: var(--panel-bg);
       color: var(--fg);
       border: 1px solid var(--border);
       border-radius: 6px;
-      padding: 6px 10px;
+      padding: 5px 9px;
       font-size: 13px;
       cursor: pointer;
       outline: none;
     }
     select:focus { border-color: var(--accent); }
 
-    /* Tema toggle */
-    .theme-toggle {
+    /* Toggle generico (Tema / Formato) */
+    .toggle-group {
       display: flex;
       background: var(--panel-bg);
       border: 1px solid var(--border);
       border-radius: 6px;
       overflow: hidden;
     }
-    .theme-toggle button {
+    .toggle-group button {
       background: transparent;
       color: var(--fg-dim);
       border: none;
-      padding: 6px 14px;
-      font-size: 13px;
+      padding: 5px 11px;
+      font-size: 12px;
       cursor: pointer;
-      transition: background .15s, color .15s;
+      transition: background .13s, color .13s;
     }
-    .theme-toggle button.active {
-      background: var(--accent);
-      color: #fff;
-    }
+    .toggle-group button.active { background: var(--accent); color: #fff; }
 
-    /* Bottone copia */
     #copy-btn {
       background: var(--accent);
       color: #fff;
       border: none;
       border-radius: 7px;
-      padding: 8px 18px;
+      padding: 7px 18px;
       font-size: 13px;
       font-weight: 600;
       cursor: pointer;
-      transition: background .15s, transform .1s;
+      transition: background .13s, transform .1s;
+      white-space: nowrap;
     }
     #copy-btn:hover  { background: var(--accent-hov); }
     #copy-btn:active { transform: scale(.97); }
 
-    #status {
-      font-size: 12px;
-      color: var(--fg-dim);
-      flex: 1;
-      text-align: center;
+    /* ── Barra slider ───────────────────────────────────────────────────── */
+    .sliders {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 0 22px 10px;
+      flex-shrink: 0;
     }
 
-    /* ── Pannelli ──────────────────────────────────────────────────────── */
+    .slider-group {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+    .slider-group label {
+      font-size: 12px;
+      color: var(--fg-dim);
+      white-space: nowrap;
+    }
+    .slider-group .val {
+      font-size: 12px;
+      color: var(--fg);
+      min-width: 34px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    input[type=range] {
+      -webkit-appearance: none;
+      width: 90px;
+      height: 4px;
+      background: var(--border);
+      border-radius: 2px;
+      outline: none;
+      cursor: pointer;
+    }
+    input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 13px;
+      height: 13px;
+      border-radius: 50%;
+      background: var(--accent);
+      cursor: pointer;
+      transition: background .13s;
+    }
+    input[type=range]::-webkit-slider-thumb:hover { background: var(--accent-hov); }
+
+    /* ── Pannelli ───────────────────────────────────────────────────────── */
     .panels {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -195,8 +219,8 @@
       flex-direction: column;
       background: var(--panel-bg);
       border-radius: var(--radius);
-      overflow: hidden;
       border: 1px solid var(--border);
+      overflow: hidden;
     }
 
     .panel-label {
@@ -205,7 +229,7 @@
       letter-spacing: .6px;
       text-transform: uppercase;
       color: var(--fg-dim);
-      padding: 9px 14px 7px;
+      padding: 8px 14px 6px;
       border-bottom: 1px solid var(--border);
       flex-shrink: 0;
     }
@@ -223,59 +247,60 @@
       font-size: 13.5px;
       line-height: 1.65;
       caret-color: var(--fg);
+      tab-size: 4;
+      white-space: pre;        /* no word-wrap */
+      overflow: auto;
     }
     #code-input::selection { background: var(--sel); }
 
-    /* Preview */
+    /* Preview scroll — scorre, non stringe */
     .preview-scroll {
       flex: 1;
       overflow: auto;
-      display: flex;
-      align-items: flex-start;
-      padding: 4px;
+      padding: 6px;
     }
 
-    /* Il div che viene esportato come PNG */
+    /* Export target — si allarga col contenuto, non viene forzato */
     #export-target {
-      background: var(--preview-bg);
-      padding: 26px 30px;
-      display: inline-block;
-      min-width: 100%;
+      display: inline-block;   /* larghezza = contenuto */
+      white-space: nowrap;     /* niente a-capo forzato */
+      min-width: calc(100% - 12px);
     }
 
     #export-target pre {
       margin: 0;
+      padding: var(--code-padding);
     }
 
     #export-target pre code {
       font-family: 'JetBrains Mono', 'Menlo', 'Courier New', monospace !important;
-      font-size: 14px !important;
-      line-height: 1.65 !important;
+      font-size: var(--code-font-size) !important;
+      line-height: var(--code-line-height) !important;
       background: transparent !important;
       padding: 0 !important;
+      white-space: pre;        /* mantieni spacing originale */
+      tab-size: 4;
     }
 
-    /* ── Tema Chiaro: override variabili ───────────────────────────────── */
+    /* ── Tema Chiaro ────────────────────────────────────────────────────── */
     body.light {
-      --app-bg:     #f0f0f5;
-      --panel-bg:   #f0f4f9;
-      --fg:         #383a42;
-      --fg-dim:     #777;
-      --border:     #d8d8e0;
-      --sel:        #d0d0e0;
-      --preview-bg: #f0f4f9;
+      --app-bg:   #f0f0f5;
+      --panel-bg: #f0f4f9;
+      --fg:       #383a42;
+      --fg-dim:   #777;
+      --border:   #d8d8e0;
+      --sel:      #d0d0e0;
     }
-    body.light header h1      { color: #1a1a2e; }
-    body.light #code-input    { color: #383a42; }
-    body.light select         { color: #383a42; }
+    body.light header h1   { color: #1a1a2e; }
+    body.light #code-input { color: #383a42; }
+    body.light select      { color: #383a42; }
   </style>
 </head>
 <body>
 
-  <header>
-    <h1>Code &nbsp;→&nbsp; PNG</h1>
-  </header>
+  <header><h1>Code &nbsp;→&nbsp; PNG</h1></header>
 
+  <!-- Toolbar principale -->
   <div class="toolbar">
     <label>Linguaggio</label>
     <select id="lang-select">
@@ -299,20 +324,48 @@
     </select>
 
     <label style="margin-left:6px">Tema</label>
-    <div class="theme-toggle">
-      <button id="btn-dark"  class="active" onclick="setTheme('dark')">Scuro</button>
-      <button id="btn-light"             onclick="setTheme('light')">Chiaro</button>
+    <div class="toggle-group">
+      <button id="btn-dark"  onclick="setTheme('dark')"  class="active">Scuro</button>
+      <button id="btn-light" onclick="setTheme('light')">Chiaro</button>
     </div>
 
-    <span id="status"></span>
-    <button id="copy-btn" onclick="copyAsPng()">Copia come PNG</button>
+    <label style="margin-left:6px">Formato</label>
+    <div class="toggle-group">
+      <button id="fmt-png"  onclick="setFormat('png')"  class="active">PNG</button>
+      <button id="fmt-jpeg" onclick="setFormat('jpeg')">JPEG</button>
+    </div>
+
   </div>
 
+  <!-- Barra slider + bottone copia -->
+  <div class="sliders">
+    <div class="slider-group">
+      <label>Font</label>
+      <input type="range" id="sl-font" min="10" max="22" step="1" value="14"
+             oninput="applySliders()">
+      <span class="val" id="val-font">14px</span>
+    </div>
+    <div class="slider-group">
+      <label>Padding</label>
+      <input type="range" id="sl-pad" min="8" max="60" step="2" value="26"
+             oninput="applySliders()">
+      <span class="val" id="val-pad">26px</span>
+    </div>
+    <div class="slider-group">
+      <label>Interlinea</label>
+      <input type="range" id="sl-line" min="100" max="250" step="5" value="165"
+             oninput="applySliders()">
+      <span class="val" id="val-line">1.65</span>
+    </div>
+    <span id="status" style="flex:1; font-size:12px; color:var(--fg-dim); text-align:center;"></span>
+    <button id="copy-btn" onclick="copyImage()">Copia come PNG</button>
+  </div>
+
+  <!-- Pannelli -->
   <div class="panels">
-    <!-- Input -->
     <div class="panel">
       <div class="panel-label">Codice</div>
-      <textarea id="code-input" spellcheck="false">List&lt;Persona&gt; amici = Arrays.asList(
+      <textarea id="code-input" spellcheck="false" wrap="off">List&lt;Persona&gt; amici = Arrays.asList(
     new Persona("Saro", 24), new Persona("Taro", 21),
     new Persona("Ian", 19), new Persona("Al", 16));
 
@@ -321,11 +374,10 @@ int somma = amici.stream()
                 .reduce(0, Integer::sum);</textarea>
     </div>
 
-    <!-- Preview / export -->
     <div class="panel">
-      <div class="panel-label">Anteprima PNG</div>
+      <div class="panel-label">Anteprima</div>
       <div class="preview-scroll">
-        <div id="export-target">
+        <div id="export-target" class="theme-dark">
           <pre><code id="preview-code"></code></pre>
         </div>
       </div>
@@ -333,95 +385,123 @@ int somma = amici.stream()
   </div>
 
   <script>
-    const input       = document.getElementById('code-input');
-    const langSelect  = document.getElementById('lang-select');
-    const previewCode = document.getElementById('preview-code');
-    const exportTarget= document.getElementById('export-target');
-    const statusEl    = document.getElementById('status');
+    const input        = document.getElementById('code-input');
+    const langSelect   = document.getElementById('lang-select');
+    const previewCode  = document.getElementById('preview-code');
+    const exportTarget = document.getElementById('export-target');
+    const statusEl     = document.getElementById('status');
 
-    let currentTheme = 'dark';
+    let currentTheme  = 'dark';
+    let currentFormat = 'png';
+
+    const BG = { dark: '#282c34', light: '#f0f4f9' };
 
     // ── Tema ──────────────────────────────────────────────────────────────
-    function setTheme(theme) {
-      currentTheme = theme;
-      document.body.classList.toggle('light', theme === 'light');
-      exportTarget.classList.toggle('theme-dark',  theme === 'dark');
-      exportTarget.classList.toggle('theme-light', theme === 'light');
-      document.getElementById('btn-dark').classList.toggle('active',  theme === 'dark');
-      document.getElementById('btn-light').classList.toggle('active', theme === 'light');
+    function setTheme(t) {
+      currentTheme = t;
+      document.body.classList.toggle('light', t === 'light');
+      exportTarget.className = 'theme-' + t;
+      document.getElementById('btn-dark').classList.toggle('active',  t === 'dark');
+      document.getElementById('btn-light').classList.toggle('active', t === 'light');
       updatePreview();
+    }
+
+    // ── Formato ───────────────────────────────────────────────────────────
+    function setFormat(f) {
+      currentFormat = f;
+      document.getElementById('fmt-png').classList.toggle('active',  f === 'png');
+      document.getElementById('fmt-jpeg').classList.toggle('active', f === 'jpeg');
+      document.getElementById('copy-btn').textContent =
+        'Copia come ' + f.toUpperCase();
+    }
+
+    // ── Slider ────────────────────────────────────────────────────────────
+    function applySliders() {
+      const fs   = document.getElementById('sl-font').value;
+      const pad  = document.getElementById('sl-pad').value;
+      const line = document.getElementById('sl-line').value;
+
+      document.documentElement.style.setProperty('--code-font-size',   fs + 'px');
+      document.documentElement.style.setProperty('--code-padding',     pad + 'px');
+      document.documentElement.style.setProperty('--code-line-height', (line / 100).toFixed(2));
+
+      document.getElementById('val-font').textContent = fs + 'px';
+      document.getElementById('val-pad').textContent  = pad + 'px';
+      document.getElementById('val-line').textContent = (line / 100).toFixed(2);
     }
 
     // ── Preview ───────────────────────────────────────────────────────────
     function updatePreview() {
       const code = input.value;
       const lang = langSelect.value;
-
-      let highlighted;
+      let out;
       if (lang === 'auto') {
-        highlighted = hljs.highlightAuto(code).value;
+        out = hljs.highlightAuto(code).value;
       } else {
         try {
-          highlighted = hljs.highlight(code, { language: lang }).value;
+          out = hljs.highlight(code, { language: lang, ignoreIllegals: true }).value;
         } catch (_) {
-          highlighted = hljs.highlightAuto(code).value;
+          out = hljs.highlightAuto(code).value;
         }
       }
-      previewCode.innerHTML = highlighted;
+      previewCode.innerHTML = out;
     }
 
     input.addEventListener('input', updatePreview);
     langSelect.addEventListener('change', updatePreview);
 
-    // Init dark theme
-    setTheme('dark');
-    updatePreview();
-
-    // ── Copia come PNG ────────────────────────────────────────────────────
-    async function copyAsPng() {
+    // ── Copia / Download ──────────────────────────────────────────────────
+    async function copyImage() {
       setStatus('Generazione…', '#888');
-
       try {
         await document.fonts.ready;
 
+        const bg = BG[currentTheme];
         const canvas = await html2canvas(exportTarget, {
-          backgroundColor: currentTheme === 'dark' ? '#282c34' : '#f0f4f9',
+          backgroundColor: bg,
           scale: 2,
           useCORS: true,
           logging: false,
         });
 
+        const mimeType = currentFormat === 'jpeg' ? 'image/jpeg' : 'image/png';
+        const ext      = currentFormat === 'jpeg' ? 'jpeg' : 'png';
+
         canvas.toBlob(async (blob) => {
-          // Prova clipboard API (richiede HTTPS o localhost)
           if (navigator.clipboard && navigator.clipboard.write) {
             try {
+              // la clipboard di sistema accetta solo image/png
+              const clipBlob = currentFormat === 'png'
+                ? blob
+                : await convertTopng(canvas);
               await navigator.clipboard.write([
-                new ClipboardItem({ 'image/png': blob })
+                new ClipboardItem({ 'image/png': clipBlob })
               ]);
-              setStatus('✓ PNG copiato negli appunti!', '#50a14f');
+              setStatus('✓ Copiato negli appunti!', '#50a14f');
               return;
-            } catch (_) {
-              // fallback → download
-            }
+            } catch (_) {}
           }
-          // Fallback: scarica il file
-          downloadBlob(blob);
-          setStatus('PNG scaricato (apri su localhost per la clipboard)', '#986801');
-        }, 'image/png');
+          // fallback: download
+          downloadBlob(blob, 'codice.' + ext);
+          setStatus('Scaricato come codice.' + ext, '#986801');
+        }, mimeType, 0.92);
 
       } catch (err) {
         setStatus('Errore: ' + err.message, '#e45649');
       }
-
       setTimeout(() => setStatus('', '#888'), 4000);
     }
 
-    function downloadBlob(blob) {
+    function convertTopng(canvas) {
+      return new Promise(resolve =>
+        canvas.toBlob(resolve, 'image/png')
+      );
+    }
+
+    function downloadBlob(blob, name) {
       const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = 'codice.png';
-      a.click();
+      const a   = document.createElement('a');
+      a.href = url; a.download = name; a.click();
       URL.revokeObjectURL(url);
     }
 
@@ -429,6 +509,12 @@ int somma = amici.stream()
       statusEl.textContent = msg;
       statusEl.style.color = color;
     }
+
+    // ── Init ──────────────────────────────────────────────────────────────
+    setTheme('dark');
+    setFormat('png');
+    applySliders();
+    updatePreview();
   </script>
 </body>
 </html>
